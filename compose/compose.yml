@@ -1,0 +1,35 @@
+services:
+#Base de datos:
+  db:
+    image: mysql
+    container_name: db
+    environment:
+      MYSQL_DATABASE: 
+      MYSQL_USER: 
+      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 
+    volumes:
+      - /aliavet/db:/var/lib/mysql
+
+  server:
+    image: node:18
+    container_name: server
+    depends_on:
+      - db
+    volumes:
+      - /aliavet/server:/app
+    env_file:
+      - ../server/.env.local
+    ports:
+      - "3000:3000"
+    command: ["/bin/bash", "-c", "sleep 10 && node --watch app/server.js"]
+
+  frontend:
+    image: danielfaq/gamecol_frontend
+    container_name: frontend
+    hostname: aliavet
+    volumes:
+      - /aliavet/frontend:/app
+    ports:
+      - "4200:4200"
+    command: ["sh", "-c", "npm install && npm start"]
