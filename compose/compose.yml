@@ -4,10 +4,10 @@ services:
     image: mysql
     container_name: db
     environment:
-      MYSQL_DATABASE: 
-      MYSQL_USER: 
-      MYSQL_PASSWORD: 
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: vetermanager
+      MYSQL_USER: saintalia
+      MYSQL_PASSWORD: Yun4Ch1m1
+      MYSQL_ROOT_PASSWORD: Bung13L31n4M4rd4nV4qu1
     volumes:
       - /aliavet/db:/var/lib/mysql
 
