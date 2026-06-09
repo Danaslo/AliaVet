@@ -1,10 +1,10 @@
 services:
 #Base de datos:
   db:
-    image: mysql
+    image: mysql:8
     container_name: db
     environment:
-      MYSQL_DATABASE: vetermanager
+      MYSQL_DATABASE: vetmanager
       MYSQL_USER: saintalia
       MYSQL_PASSWORD: Yun4Ch1m1
       MYSQL_ROOT_PASSWORD: Bung13L31n4M4rd4nV4qu1
@@ -22,7 +22,7 @@ services:
       - ../server/.env.local
     ports:
       - "3000:3000"
-    command: ["/bin/bash", "-c", "sleep 10 && node --watch app/server.js"]
+    command: ["node", "--watch", "app/server.js"]
 
   frontend:
     image: danielfaq/gamecol_frontend

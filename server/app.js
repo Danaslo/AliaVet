@@ -2,6 +2,7 @@ const express = require('express');
 const router = require('./router/router');
 const cors = require('cors');
 const dotenv = require('dotenv');
+require('./model/Associations');
 
 dotenv.config();
 const FRONTEND_URL = process.env.FRONTEND_URL;

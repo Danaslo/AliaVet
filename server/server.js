@@ -7,21 +7,26 @@ const app = require('./app'); //App file for server configuration:
 const sequelize = require('./config/sequelize');
 const http = require('http');
 const server = http.createServer(app);
+const wait = (ms) => new Promise(r => setTimeout(r, ms));
 
-
+const tries = 20;
 (async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Conexión a la base de datos exitosa.');
+  for (let index = 1; index <= tries; index++) {
+    try {
+      await sequelize.authenticate();
+      console.log('Connected to database');
 
-    await sequelize.sync({ alter: true });
-    console.log('Tablas sincronizadas correctamente.');
+      await sequelize.sync({ alter: true });
+      console.log('Tablas synchronized');
 
-    server.listen(PORT, '0.0.0.0', async () => {
-      console.log(`Servidor escuchando en http://0.0.0.0:${PORT}`);
-    });
-
-  } catch (error) {
-    console.error('Error al iniciar el servidor:', error);
+      server.listen(PORT, '0.0.0.0', async () => {
+        console.log(`Server listening in port ${PORT}`);
+      });
+      return;
+    } catch (error) {
+      console.error(`Esperando MySQL, intento ${index} de ${tries}`);
+      await wait(3000);
+    }
   }
+
 })();
