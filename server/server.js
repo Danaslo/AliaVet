@@ -17,14 +17,14 @@ const tries = 20;
       console.log('Connected to database');
 
       await sequelize.sync({ alter: true });
-      console.log('Tablas synchronized');
+      console.log('Tables synchronized');
 
       server.listen(PORT, '0.0.0.0', async () => {
         console.log(`Server listening in port ${PORT}`);
       });
       return;
     } catch (error) {
-      console.error(`Esperando MySQL, intento ${index} de ${tries}`);
+      console.error(`Waiting for MySQL, itry ${index} from ${tries}`);
       await wait(3000);
     }
   }

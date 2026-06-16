@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
 
 const Pet = sequelize.define('Pet', {
@@ -20,7 +20,7 @@ const Pet = sequelize.define('Pet', {
         allowNull: false
     },
     gender: {
-        type: DataTypes.ENUM('M','F'),
+        type: DataTypes.ENUM('male', 'female', 'unknown'),
         allowNull: false
     },
     species: {
@@ -36,11 +36,14 @@ const Pet = sequelize.define('Pet', {
         allowNull: false
     },
     weight: {
-        type: DataTypes.DECIMAL(5,2),
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM("Active","Deceased","Lost","In Treatment","Archived"),
+        type: DataTypes.STRING(50),
+        validate: {
+            isIn: [["Active", "Deceased", "Lost", "In Treatment", "Archived"]]
+        },
         allowNull: false
     },
     sterilized: {
@@ -52,7 +55,8 @@ const Pet = sequelize.define('Pet', {
         allowNull: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    paranoid: true
 });
 
 module.exports = Pet;
