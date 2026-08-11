@@ -1,4 +1,4 @@
-package veterinarian;
+package com.danaslo.backend.veterinarian;
 
 public class Veterinarian {
     private Long id;
@@ -8,7 +8,8 @@ public class Veterinarian {
     private String phone;
     private String email;
 
-    public Veterinarian(){}
+    public Veterinarian() {
+    }
 
     public Veterinarian(Long id, String name, String lastName,
                         String collegeNumber, String phone, String email) {
@@ -20,9 +21,7 @@ public class Veterinarian {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
     public void setId(Long id) {
         this.id = id;
